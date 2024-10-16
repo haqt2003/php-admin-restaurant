@@ -1,0 +1,25 @@
+.select-menu {
+  height: fit-content;
+}
+
+.add-menu-btn {
+  height: fit-content;
+  width: 240px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+
+.export-menu-btn {
+  height: fit-content;
+  width: 220px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.card-img-top {
+  object-fit: cover;
+}

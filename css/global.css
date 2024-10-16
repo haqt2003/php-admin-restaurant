@@ -1,0 +1,157 @@
+.bg-success {
+  background-color: #15a362 !important;
+}
+
+.bg-success-btn {
+  background-color: #15a362 !important;
+  border: none;
+}
+
+.bg-success-btn:hover {
+  border: none;
+  background-color: #0d864f !important;
+}
+
+.bg-primary-btn {
+  background-color: #3880de !important;
+  border: none;
+}
+
+.bg-primary-btn:hover {
+  border: none;
+  background-color: #2c69b9 !important;
+}
+
+.bg-warning-btn {
+  border: none;
+  color: white;
+  background-color: #f3bd1a !important;
+}
+
+.bg-warning-btn:hover {
+  border: none;
+  color: white;
+  background-color: #e7ad00 !important;
+}
+
+.bg-danger {
+  background-color: #ea4151 !important;
+}
+
+.bg-danger-btn {
+  background-color: #ea4151 !important;
+  border: none;
+}
+
+.bg-danger-btn:hover {
+  background-color: #d13645 !important;
+  border: none;
+}
+
+.text-success {
+  color: #15a362;
+}
+
+body {
+  background-color: #f5f6fe;
+  font-family: "Afacad Flux", sans-serif;
+  font-size: 16px;
+  padding-bottom: 40px;
+}
+
+.table {
+  vertical-align: middle;
+}
+
+textarea {
+  resize: none;
+}
+
+input:disabled {
+  background-color: white !important;
+}
+
+.tab {
+  background-color: white;
+  height: 100vh;
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.05);
+  padding-left: 0px;
+  padding-right: 0px;
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+
+.tab_item {
+  height: 48px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  padding-left: 24px;
+  cursor: pointer;
+  text-decoration: none;
+  gap: 14px;
+  color: black;
+}
+
+.tab_item:hover {
+  color: #30a462;
+}
+
+.tab_item.active {
+  background-color: #edfdf6;
+  color: #30a462;
+  font-weight: 600;
+  border-left: 3px solid #15a362;
+}
+
+.hr-tab {
+  margin-top: 320px;
+}
+
+.logout-btn {
+  left: 20px;
+  padding-left: 20px;
+  padding-right: 20px;
+  position: absolute;
+  bottom: 36px;
+}
+
+.wrapper-content {
+  padding: 0 36px 0 36px;
+}
+
+.main {
+  padding-left: 0px;
+  padding-right: 0px;
+}
+
+.header {
+  height: 64px;
+  background-color: white;
+  width: 100%;
+  padding: 0 24px 0 20px;
+}
+
+.search-bar {
+  width: 40%;
+  margin: 0;
+  padding: 0;
+  margin-left: 16px;
+}
+
+.header_user {
+  position: relative;
+  cursor: pointer;
+}
+
+.header_user-dropdown {
+  position: absolute;
+  right: 0;
+  top: 36px;
+  width: 160px;
+}
+
+.list-group-item:hover {
+  background-color: #edfdf6;
+}

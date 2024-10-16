@@ -1,0 +1,53 @@
+body {
+  background-color: #f5f6fe;
+  font-family: "Afacad Flux", sans-serif;
+  font-size: 16px;
+  padding: 0 !important;
+}
+
+.login-containter {
+  height: 100vh;
+}
+
+.banner {
+  height: 100%;
+  background-image: url("../assets/images/banner.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.login-form {
+  background-color: white;
+  height: 100%;
+  overflow: hidden;
+}
+
+.login-text {
+  margin-top: 150px;
+}
+
+.form-floating {
+  max-width: 360px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.login-btn {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  width: 100%;
+  max-width: 360px;
+}
+
+a {
+  text-decoration: none;
+  color: black;
+  font-weight: 450;
+}
+
+@media only screen and (max-width: 991px) {
+  .banner {
+    display: none !important;
+  }
+}

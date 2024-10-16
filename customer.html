@@ -1,0 +1,707 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+      crossorigin="anonymous"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Afacad+Flux:wght@100..1000&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./css/global.css" />
+    <link rel="stylesheet" href="./css/customer.css" />
+    <link rel="stylesheet" href="./css/themify-icons.css" />
+  </head>
+  <body>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-2 tab py-3">
+          <div class="d-flex px-4"><h4 class="">ADMIN</h4></div>
+          <a href="./index.html" class="mt-4 tab_item">
+            <i class="ti-home"></i>
+            <span>Trang chủ</span>
+          </a>
+          <a href="./menu.html" class="tab_item">
+            <i class="ti-menu-alt"></i>
+            <span>Thực đơn</span>
+          </a>
+          <a href="./staff.html" class="tab_item">
+            <i class="ti-user"></i>
+            <span>Nhân viên</span>
+          </a>
+          <a href="./customer.html" class="tab_item active">
+            <i class="ti-face-smile"></i>
+            <span>Khách hàng</span>
+          </a>
+          <a href="./order.html" class="tab_item">
+            <i class="ti-clipboard"></i>
+            <span>Đơn hàng</span>
+          </a>
+          <!-- <hr class="hr-tab" /> -->
+          <button
+            class="btn btn-danger bg-danger-btn logout-btn"
+            data-bs-toggle="modal"
+            data-bs-target="#signOut"
+          >
+            Đăng xuất
+          </button>
+        </div>
+        <div class="col"></div>
+        <div class="col-10 main">
+          <div class="header d-flex align-items-center justify-content-between">
+            <div class="input-group search-bar">
+              <input
+                type="text"
+                class="form-control"
+                placeholder="Vui lòng nhập..."
+                aria-label="Recipient's username"
+                aria-describedby="button-addon2"
+              />
+              <button
+                class="btn btn-outline-success"
+                type="button"
+                id="button-addon2"
+              >
+                Tìm kiếm
+              </button>
+            </div>
+            <div class="d-flex gap-2 align-items-center header_user">
+              <span>Chào, Trần Hà! </span>
+              <i class="ti-angle-down dropdown-user"></i>
+
+              <ul class="list-group header_user-dropdown visually-hidden">
+                <a href="./user.html" class="list-group-item">Tài khoản</a>
+                <a
+                  href=""
+                  class="list-group-item"
+                  data-bs-toggle="modal"
+                  data-bs-target="#signOut"
+                  >Đăng xuất</a
+                >
+              </ul>
+            </div>
+          </div>
+          <div class="mt-4 wrapper-content">
+            <div class="d-flex justify-content-between">
+              <h3>Khách hàng</h3>
+              <div
+                class="d-flex gap-2 justify-content-end wrapper-customer-btn"
+              >
+                <button
+                  type="button"
+                  class="btn btn-primary bg-primary-btn export-customer-btn"
+                >
+                  <i class="ti-export"></i>
+                  Xuất CSV
+                </button>
+                <button
+                  type="button"
+                  class="btn btn-success bg-success-btn add-customer-btn"
+                  data-bs-toggle="modal"
+                  data-bs-target="#modalAdd"
+                >
+                  <i class="ti-plus"></i>
+                  Thêm khách hàng
+                </button>
+              </div>
+            </div>
+            <table class="table table-bordered mt-4">
+              <thead>
+                <tr>
+                  <th scope="col">STT</th>
+                  <th scope="col">Họ và tên</th>
+                  <th scope="col">Giới tính</th>
+                  <th scope="col">Ngày sinh</th>
+                  <th scope="col">Số điện thoại</th>
+                  <th scope="col" style="width: 140px">Tổng số đơn hàng</th>
+                  <th scope="col">Tổng chi tiêu</th>
+                  <th class="text-end"></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row">1</th>
+                  <td>Nguyễn Văn A</td>
+                  <td>Nam</td>
+                  <td>01/01/1990</td>
+                  <td>0901234567</td>
+                  <td>5</td>
+                  <td>20.000.000đ</td>
+                  <td class="text-end">
+                    <button
+                      type="button"
+                      class="btn btn-primary bg-primary-btn"
+                      data-bs-toggle="modal"
+                      data-bs-target="#modalEdit"
+                    >
+                      Sửa
+                    </button>
+                    <button
+                      type="button"
+                      class="btn btn-danger bg-danger-btn ml"
+                      data-bs-toggle="modal"
+                      data-bs-target="#modalDelete"
+                    >
+                      Xóa
+                    </button>
+                  </td>
+                </tr>
+                <tr>
+                  <th scope="row">2</th>
+                  <td>Trần Thị B</td>
+                  <td>Nữ</td>
+                  <td>02/02/1992</td>
+                  <td>0902345678</td>
+                  <td>3</td>
+                  <td>15.000.000đ</td>
+                  <td class="text-end">
+                    <button
+                      type="button"
+                      class="btn btn-primary bg-primary-btn"
+                      data-bs-toggle="modal"
+                      data-bs-target="#modalEdit"
+                    >
+                      Sửa
+                    </button>
+                    <button
+                      type="button"
+                      class="btn btn-danger bg-danger-btn ml"
+                      data-bs-toggle="modal"
+                      data-bs-target="#modalDelete"
+                    >
+                      Xóa
+                    </button>
+                  </td>
+                </tr>
+                <tr>
+                  <th scope="row">3</th>
+                  <td>Lê Văn C</td>
+                  <td>Nam</td>
+                  <td>03/03/1991</td>
+                  <td>0903456789</td>
+                  <td>4</td>
+                  <td>30.000.000đ</td>
+                  <td class="text-end">
+                    <button
+                      type="button"
+                      class="btn btn-primary bg-primary-btn"
+                      data-bs-toggle="modal"
+                      data-bs-target="#modalEdit"
+                    >
+                      Sửa
+                    </button>
+                    <button
+                      type="button"
+                      class="btn btn-danger bg-danger-btn ml"
+                      data-bs-toggle="modal"
+                      data-bs-target="#modalDelete"
+                    >
+                      Xóa
+                    </button>
+                  </td>
+                </tr>
+                <tr>
+                  <th scope="row">4</th>
+                  <td>Phạm Thị D</td>
+                  <td>Nữ</td>
+                  <td>04/04/1993</td>
+                  <td>0904567890</td>
+                  <td>2</td>
+                  <td>10.000.000đ</td>
+                  <td class="text-end">
+                    <button
+                      type="button"
+                      class="btn btn-primary bg-primary-btn"
+                      data-bs-toggle="modal"
+                      data-bs-target="#modalEdit"
+                    >
+                      Sửa
+                    </button>
+                    <button
+                      type="button"
+                      class="btn btn-danger bg-danger-btn ml"
+                      data-bs-toggle="modal"
+                      data-bs-target="#modalDelete"
+                    >
+                      Xóa
+                    </button>
+                  </td>
+                </tr>
+                <tr>
+                  <th scope="row">5</th>
+                  <td>Võ Văn E</td>
+                  <td>Nam</td>
+                  <td>05/05/1995</td>
+                  <td>0905678901</td>
+                  <td>6</td>
+                  <td>25.000.000đ</td>
+                  <td class="text-end">
+                    <button
+                      type="button"
+                      class="btn btn-primary bg-primary-btn"
+                      data-bs-toggle="modal"
+                      data-bs-target="#modalEdit"
+                    >
+                      Sửa
+                    </button>
+                    <button
+                      type="button"
+                      class="btn btn-danger bg-danger-btn ml"
+                      data-bs-toggle="modal"
+                      data-bs-target="#modalDelete"
+                    >
+                      Xóa
+                    </button>
+                  </td>
+                </tr>
+                <tr>
+                  <th scope="row">6</th>
+                  <td>Nguyễn Thị F</td>
+                  <td>Nữ</td>
+                  <td>06/06/1994</td>
+                  <td>0906789012</td>
+                  <td>1</td>
+                  <td>5.000.000đ</td>
+                  <td class="text-end">
+                    <button
+                      type="button"
+                      class="btn btn-primary bg-primary-btn"
+                      data-bs-toggle="modal"
+                      data-bs-target="#modalEdit"
+                    >
+                      Sửa
+                    </button>
+                    <button
+                      type="button"
+                      class="btn btn-danger bg-danger-btn ml"
+                      data-bs-toggle="modal"
+                      data-bs-target="#modalDelete"
+                    >
+                      Xóa
+                    </button>
+                  </td>
+                </tr>
+                <tr>
+                  <th scope="row">7</th>
+                  <td>Đặng Văn G</td>
+                  <td>Nam</td>
+                  <td>07/07/1988</td>
+                  <td>0907890123</td>
+                  <td>7</td>
+                  <td>40.000.000đ</td>
+                  <td class="text-end">
+                    <button
+                      type="button"
+                      class="btn btn-primary bg-primary-btn"
+                      data-bs-toggle="modal"
+                      data-bs-target="#modalEdit"
+                    >
+                      Sửa
+                    </button>
+                    <button
+                      type="button"
+                      class="btn btn-danger bg-danger-btn ml"
+                      data-bs-toggle="modal"
+                      data-bs-target="#modalDelete"
+                    >
+                      Xóa
+                    </button>
+                  </td>
+                </tr>
+                <tr>
+                  <th scope="row">8</th>
+                  <td>Nguyễn Văn H</td>
+                  <td>Nam</td>
+                  <td>08/08/1990</td>
+                  <td>0908901234</td>
+                  <td>3</td>
+                  <td>15.000.000đ</td>
+                  <td class="text-end">
+                    <button
+                      type="button"
+                      class="btn btn-primary bg-primary-btn"
+                      data-bs-toggle="modal"
+                      data-bs-target="#modalEdit"
+                    >
+                      Sửa
+                    </button>
+                    <button
+                      type="button"
+                      class="btn btn-danger bg-danger-btn ml"
+                      data-bs-toggle="modal"
+                      data-bs-target="#modalDelete"
+                    >
+                      Xóa
+                    </button>
+                  </td>
+                </tr>
+                <tr>
+                  <th scope="row">9</th>
+                  <td>Trần Thị I</td>
+                  <td>Nữ</td>
+                  <td>09/09/1992</td>
+                  <td>0909012345</td>
+                  <td>4</td>
+                  <td>20.000.000đ</td>
+                  <td class="text-end">
+                    <button
+                      type="button"
+                      class="btn btn-primary bg-primary-btn"
+                      data-bs-toggle="modal"
+                      data-bs-target="#modalEdit"
+                    >
+                      Sửa
+                    </button>
+                    <button
+                      type="button"
+                      class="btn btn-danger bg-danger-btn ml"
+                      data-bs-toggle="modal"
+                      data-bs-target="#modalDelete"
+                    >
+                      Xóa
+                    </button>
+                  </td>
+                </tr>
+                <tr>
+                  <th scope="row">10</th>
+                  <td>Hoàng Văn K</td>
+                  <td>Nam</td>
+                  <td>10/10/1989</td>
+                  <td>0910123456</td>
+                  <td>2</td>
+                  <td>10.000.000đ</td>
+                  <td class="text-end">
+                    <button
+                      type="button"
+                      class="btn btn-primary bg-primary-btn"
+                      data-bs-toggle="modal"
+                      data-bs-target="#modalEdit"
+                    >
+                      Sửa
+                    </button>
+                    <button
+                      type="button"
+                      class="btn btn-danger bg-danger-btn ml"
+                      data-bs-toggle="modal"
+                      data-bs-target="#modalDelete"
+                    >
+                      Xóa
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+
+            <div class="d-flex justify-content-center">
+              <nav aria-label="Page navigation example" class="mt-3">
+                <ul class="pagination">
+                  <li class="page-item disabled">
+                    <a class="page-link" href="#" aria-label="Previous">
+                      <span aria-hidden="true">&laquo;</span>
+                    </a>
+                  </li>
+                  <li class="page-item active" aria-current="page">
+                    <a class="page-link" href="#">1</a>
+                  </li>
+                  <li class="page-item"><a class="page-link" href="#">2</a></li>
+                  <li class="page-item"><a class="page-link" href="#">3</a></li>
+                  <li class="page-item">
+                    <a class="page-link" href="#" aria-label="Next">
+                      <span aria-hidden="true">&raquo;</span>
+                    </a>
+                  </li>
+                </ul>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      class="modal fade"
+      id="signOut"
+      tabindex="-1"
+      aria-labelledby="signOutLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="signOutLabel">Đăng xuất</h1>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">Bạn chắc chắn muốn đăng xuất?</div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Đóng
+            </button>
+            <a
+              href="./login.html"
+              type="button"
+              class="btn btn-danger bg-danger-btn"
+              >Đăng xuất</a
+            >
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Thêm -->
+    <div
+      class="modal fade"
+      id="modalAdd"
+      tabindex="-1"
+      aria-labelledby="modalAddLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="modalAddLabel">Thêm khách hàng</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <form>
+              <div class="row">
+                <div class="col">
+                  <div class="mb-4">
+                    <label for="nameAdd" class="form-label"
+                      >Tên khách hàng
+                    </label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="nameAdd"
+                      aria-describedby="nameAdd"
+                    />
+                  </div>
+                </div>
+                <div class="col">
+                  <div class="mb-4">
+                    <label for="genderAdd" class="form-label">Giới tính</label>
+                    <select
+                      class="form-select"
+                      aria-label="Default select example"
+                    >
+                      <option selected disabled>Chọn</option>
+                      <option value="male">Nam</option>
+                      <option value="female">Nữ</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col">
+                  <div class="mb-4">
+                    <label for="phoneAdd" class="form-label"
+                      >Số điện thoại
+                    </label>
+                    <input type="text" class="form-control" id="phoneAdd" />
+                  </div>
+                </div>
+                <div class="col">
+                  <div class="mb-4">
+                    <label for="birthAdd" class="form-label">Ngày sinh</label>
+                    <input type="date" class="form-control" id="birthAdd" />
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col">
+                  <div class="mb-4">
+                    <label for="orderAdd" class="form-label"
+                      >Tổng số đơn hàng
+                    </label>
+                    <input type="text" class="form-control" id="orderAdd" />
+                  </div>
+                </div>
+                <div class="col">
+                  <div class="mb-4">
+                    <label for="spendAdd" class="form-label"
+                      >Tổng chi tiêu</label
+                    >
+                    <input type="text" class="form-control" id="spendAdd" />
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Đóng
+            </button>
+            <button type="button" class="btn btn-success bg-success-btn">
+              Thêm
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Sửa -->
+    <div
+      class="modal fade"
+      id="modalEdit"
+      tabindex="-1"
+      aria-labelledby="modalEditLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="modalEditLabel">Sửa khách hàng</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <form>
+              <div class="row">
+                <div class="col">
+                  <div class="mb-4">
+                    <label for="nameEdit" class="form-label"
+                      >Tên khách hàng
+                    </label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="nameEdit"
+                      aria-describedby="nameEdit"
+                    />
+                  </div>
+                </div>
+                <div class="col">
+                  <div class="mb-4">
+                    <label for="genderEdit" class="form-label">Giới tính</label>
+                    <select
+                      class="form-select"
+                      aria-label="Default select example"
+                    >
+                      <option selected disabled>Chọn</option>
+                      <option value="male">Nam</option>
+                      <option value="female">Nữ</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col">
+                  <div class="mb-4">
+                    <label for="phoneEdit" class="form-label"
+                      >Số điện thoại
+                    </label>
+                    <input type="text" class="form-control" id="phoneEdit" />
+                  </div>
+                </div>
+                <div class="col">
+                  <div class="mb-4">
+                    <label for="birthEdit" class="form-label">Ngày sinh</label>
+                    <input type="date" class="form-control" id="birthEdit" />
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col">
+                  <div class="mb-4">
+                    <label for="orderEdit" class="form-label"
+                      >Tổng số đơn hàng
+                    </label>
+                    <input type="text" class="form-control" id="orderEdit" />
+                  </div>
+                </div>
+                <div class="col">
+                  <div class="mb-4">
+                    <label for="spendEdit" class="form-label"
+                      >Tổng chi tiêu</label
+                    >
+                    <input type="text" class="form-control" id="spendEdit" />
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Đóng
+            </button>
+            <button type="button" class="btn btn-primary bg-primary-btn">
+              Lưu thay đổi
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Xóa -->
+    <div
+      class="modal fade"
+      id="modalDelete"
+      tabindex="-1"
+      aria-labelledby="modalDeleteLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="modalDeleteLabel">Xóa khách hàng</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">Bạn chắc chắn muốn xóa?</div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Hủy
+            </button>
+            <button type="button" class="btn btn-danger bg-danger-btn">
+              Xóa
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+      crossorigin="anonymous"
+    ></script>
+    <script src="./js/index.js"></script>
+  </body>
+</html>

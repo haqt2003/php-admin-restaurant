@@ -1,0 +1,21 @@
+.wrapper-staff-btn {
+  width: 300px;
+}
+
+.add-staff-btn {
+  height: fit-content;
+  width: 270px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+
+.export-staff-btn {
+  height: fit-content;
+  width: 220px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}

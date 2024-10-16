@@ -1,0 +1,667 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+      crossorigin="anonymous"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Afacad+Flux:wght@100..1000&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./css/global.css" />
+    <link rel="stylesheet" href="./css/menu.css" />
+    <link rel="stylesheet" href="./css/themify-icons.css" />
+  </head>
+  <body>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-2 tab py-3">
+          <div class="d-flex px-4"><h4 class="">ADMIN</h4></div>
+          <a href="./index.html" class="mt-4 tab_item">
+            <i class="ti-home"></i>
+            <span>Trang chủ</span>
+          </a>
+          <a href="./menu.html" class="tab_item active">
+            <i class="ti-menu-alt"></i>
+            <span>Thực đơn</span>
+          </a>
+          <a href="./staff.html" class="tab_item">
+            <i class="ti-user"></i>
+            <span>Nhân viên</span>
+          </a>
+          <a href="./customer.html" class="tab_item">
+            <i class="ti-face-smile"></i>
+            <span>Khách hàng</span>
+          </a>
+          <a href="./order.html" class="tab_item">
+            <i class="ti-clipboard"></i>
+            <span>Đơn hàng</span>
+          </a>
+          <!-- <hr class="hr-tab" /> -->
+          <button
+            class="btn btn-danger bg-danger-btn logout-btn"
+            data-bs-toggle="modal"
+            data-bs-target="#signOut"
+          >
+            Đăng xuất
+          </button>
+        </div>
+        <div class="col"></div>
+        <div class="col-10 main">
+          <div class="header d-flex align-items-center justify-content-between">
+            <div class="input-group search-bar">
+              <input
+                type="text"
+                class="form-control"
+                placeholder="Vui lòng nhập..."
+                aria-label="Recipient's username"
+                aria-describedby="button-addon2"
+              />
+              <button
+                class="btn btn-outline-success"
+                type="button"
+                id="button-addon2"
+              >
+                Tìm kiếm
+              </button>
+            </div>
+            <div class="d-flex gap-2 align-items-center header_user">
+              <span>Chào, Trần Hà! </span>
+              <i class="ti-angle-down dropdown-user"></i>
+
+              <ul class="list-group header_user-dropdown visually-hidden">
+                <a href="./user.html" class="list-group-item">Tài khoản</a>
+                <a
+                  href=""
+                  class="list-group-item"
+                  data-bs-toggle="modal"
+                  data-bs-target="#signOut"
+                  >Đăng xuất</a
+                >
+              </ul>
+            </div>
+          </div>
+          <div class="mt-4 wrapper-content">
+            <div class="d-flex justify-content-between">
+              <h3>Thực đơn</h3>
+              <div class="d-flex gap-2 justify-content-end">
+                <select
+                  class="form-select select-menu"
+                  aria-label="Default select example"
+                >
+                  <option selected>Tất cả</option>
+                  <option value="hai-san">Hải sản</option>
+                  <option value="thit-nuong">Thịt nướng</option>
+                  <option value="dimsum">Dimsum, Cơm, Mỳ</option>
+                  <option value="rau-cu">Rau củ quả nướng</option>
+                  <option value="lau">Lẩu</option>
+                </select>
+                <button
+                  type="button"
+                  class="btn btn-primary bg-primary-btn export-menu-btn"
+                >
+                  <i class="ti-export"></i>
+                  Xuất CSV
+                </button>
+                <button
+                  type="button"
+                  class="btn btn-success bg-success-btn add-menu-btn"
+                  data-bs-toggle="modal"
+                  data-bs-target="#modalAdd"
+                >
+                  <i class="ti-plus"></i>
+                  Thêm món ăn
+                </button>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-12 col-sm-6 col-lg-3 mt-4">
+                <div class="card">
+                  <div class="ratio ratio-4x3">
+                    <img
+                      src="./assets/images/lau-ech.jpg"
+                      class="card-img-top"
+                      alt="..."
+                    />
+                  </div>
+                  <div class="card-body">
+                    <h5 class="card-title">Lẩu ếch</h5>
+                    <p class="card-text">Giá: 420.000đ <br />Thể loại: Lẩu</p>
+
+                    <div class="d-flex gap-2">
+                      <button
+                        class="btn btn-primary bg-primary-btn"
+                        data-bs-toggle="modal"
+                        data-bs-target="#modalEdit"
+                      >
+                        Sửa
+                      </button>
+                      <button
+                        class="btn btn-danger bg-danger-btn"
+                        data-bs-toggle="modal"
+                        data-bs-target="#modalDelete"
+                      >
+                        Xóa
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-12 col-sm-6 col-lg-3 mt-4">
+                <div class="card">
+                  <div class="ratio ratio-4x3">
+                    <img
+                      src="./assets/images/ca-cay.jpg"
+                      class="card-img-top"
+                      alt="..."
+                    />
+                  </div>
+                  <div class="card-body">
+                    <h5 class="card-title">Cá cay thượng hải</h5>
+                    <p class="card-text">
+                      Giá: 320.000đ <br />Thể loại: Hải sản
+                    </p>
+
+                    <div class="d-flex gap-2">
+                      <button
+                        class="btn btn-primary bg-primary-btn"
+                        data-bs-toggle="modal"
+                        data-bs-target="#modalEdit"
+                      >
+                        Sửa
+                      </button>
+                      <button
+                        class="btn btn-danger bg-danger-btn"
+                        data-bs-toggle="modal"
+                        data-bs-target="#modalDelete"
+                      >
+                        Xóa
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-12 col-sm-6 col-lg-3 mt-4">
+                <div class="card">
+                  <div class="ratio ratio-4x3">
+                    <img
+                      src="./assets/images/nam-kim-cham-nuong.jpg"
+                      class="card-img-top"
+                      alt="..."
+                    />
+                  </div>
+                  <div class="card-body">
+                    <h5 class="card-title">Nấm kim châm nướng</h5>
+                    <p class="card-text">
+                      Giá: 16.000đ <br />Thể loại: Rau củ quả nướng
+                    </p>
+
+                    <div class="d-flex gap-2">
+                      <button
+                        class="btn btn-primary bg-primary-btn"
+                        data-bs-toggle="modal"
+                        data-bs-target="#modalEdit"
+                      >
+                        Sửa
+                      </button>
+                      <button
+                        class="btn btn-danger bg-danger-btn"
+                        data-bs-toggle="modal"
+                        data-bs-target="#modalDelete"
+                      >
+                        Xóa
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-12 col-sm-6 col-lg-3 mt-4">
+                <div class="card">
+                  <div class="ratio ratio-4x3">
+                    <img
+                      src="./assets/images/rau-muc-nuong.jpg"
+                      class="card-img-top"
+                      alt="..."
+                    />
+                  </div>
+                  <div class="card-body">
+                    <h5 class="card-title">Râu mực nướng</h5>
+                    <p class="card-text">
+                      Giá: 28.000đ <br />Thể loại: Hải sản
+                    </p>
+
+                    <div class="d-flex gap-2">
+                      <button
+                        class="btn btn-primary bg-primary-btn"
+                        data-bs-toggle="modal"
+                        data-bs-target="#modalEdit"
+                      >
+                        Sửa
+                      </button>
+                      <button
+                        class="btn btn-danger bg-danger-btn"
+                        data-bs-toggle="modal"
+                        data-bs-target="#modalDelete"
+                      >
+                        Xóa
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-12 col-sm-6 col-lg-3 mt-4">
+                <div class="card">
+                  <div class="ratio ratio-4x3">
+                    <img
+                      src="./assets/images/ca-nuong-thuong-hai.jpg"
+                      class="card-img-top"
+                      alt="..."
+                    />
+                  </div>
+                  <div class="card-body">
+                    <h5 class="card-title">Cá nướng thượng hải</h5>
+                    <p class="card-text">
+                      Giá: 299.000đ <br />Thể loại: Hải sản
+                    </p>
+
+                    <div class="d-flex gap-2">
+                      <button
+                        class="btn btn-primary bg-primary-btn"
+                        data-bs-toggle="modal"
+                        data-bs-target="#modalEdit"
+                      >
+                        Sửa
+                      </button>
+                      <button
+                        class="btn btn-danger bg-danger-btn"
+                        data-bs-toggle="modal"
+                        data-bs-target="#modalDelete"
+                      >
+                        Xóa
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-12 col-sm-6 col-lg-3 mt-4">
+                <div class="card">
+                  <div class="ratio ratio-4x3">
+                    <img
+                      src="./assets/images/ca-tim-dai-nuong.jpg"
+                      class="card-img-top"
+                      alt="..."
+                    />
+                  </div>
+                  <div class="card-body">
+                    <h5 class="card-title">Cà tím dài nướng</h5>
+                    <p class="card-text">
+                      Giá: 25.000đ <br />Thể loại: Rau củ quả nướng
+                    </p>
+
+                    <div class="d-flex gap-2">
+                      <button
+                        class="btn btn-primary bg-primary-btn"
+                        data-bs-toggle="modal"
+                        data-bs-target="#modalEdit"
+                      >
+                        Sửa
+                      </button>
+                      <button
+                        class="btn btn-danger bg-danger-btn"
+                        data-bs-toggle="modal"
+                        data-bs-target="#modalDelete"
+                      >
+                        Xóa
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-12 col-sm-6 col-lg-3 mt-4">
+                <div class="card">
+                  <div class="ratio ratio-4x3">
+                    <img
+                      src="./assets/images/cuu-nuong.jpg"
+                      class="card-img-top"
+                      alt="..."
+                    />
+                  </div>
+                  <div class="card-body">
+                    <h5 class="card-title">Cừu nướng</h5>
+                    <p class="card-text">
+                      Giá: 32.000đ <br />Thể loại: Thịt nướng
+                    </p>
+
+                    <div class="d-flex gap-2">
+                      <button
+                        class="btn btn-primary bg-primary-btn"
+                        data-bs-toggle="modal"
+                        data-bs-target="#modalEdit"
+                      >
+                        Sửa
+                      </button>
+                      <button
+                        class="btn btn-danger bg-danger-btn"
+                        data-bs-toggle="modal"
+                        data-bs-target="#modalDelete"
+                      >
+                        Xóa
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-12 col-sm-6 col-lg-3 mt-4">
+                <div class="card">
+                  <div class="ratio ratio-4x3">
+                    <img
+                      src="./assets/images/dau-cove-nuong.jpg"
+                      class="card-img-top"
+                      alt="..."
+                    />
+                  </div>
+                  <div class="card-body">
+                    <h5 class="card-title">Đậu cove nướng</h5>
+                    <p class="card-text">
+                      Giá: 8.000đ <br />Thể loại: Rau củ quả nướng
+                    </p>
+
+                    <div class="d-flex gap-2">
+                      <button
+                        class="btn btn-primary bg-primary-btn"
+                        data-bs-toggle="modal"
+                        data-bs-target="#modalEdit"
+                      >
+                        Sửa
+                      </button>
+                      <button
+                        class="btn btn-danger bg-danger-btn"
+                        data-bs-toggle="modal"
+                        data-bs-target="#modalDelete"
+                      >
+                        Xóa
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="d-flex justify-content-center">
+              <nav aria-label="Page navigation example" class="mt-4">
+                <ul class="pagination">
+                  <li class="page-item disabled">
+                    <a class="page-link" href="#" aria-label="Previous">
+                      <span aria-hidden="true">&laquo;</span>
+                    </a>
+                  </li>
+                  <li class="page-item active" aria-current="page">
+                    <a class="page-link" href="#">1</a>
+                  </li>
+                  <li class="page-item"><a class="page-link" href="#">2</a></li>
+                  <li class="page-item"><a class="page-link" href="#">3</a></li>
+                  <li class="page-item">
+                    <a class="page-link" href="#" aria-label="Next">
+                      <span aria-hidden="true">&raquo;</span>
+                    </a>
+                  </li>
+                </ul>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      class="modal fade"
+      id="signOut"
+      tabindex="-1"
+      aria-labelledby="signOutLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="signOutLabel">Đăng xuất</h1>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">Bạn chắc chắn muốn đăng xuất?</div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Đóng
+            </button>
+            <a
+              href="./login.html"
+              type="button"
+              class="btn btn-danger bg-danger-btn"
+              >Đăng xuất</a
+            >
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Thêm -->
+    <div
+      class="modal fade"
+      id="modalAdd"
+      tabindex="-1"
+      aria-labelledby="modalAddLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="modalAddLabel">Thêm món ăn</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <form>
+              <div class="mb-4">
+                <label for="nameAdd" class="form-label">Tên món ăn</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="nameAdd"
+                  aria-describedby="nameAdd"
+                />
+              </div>
+              <div class="row">
+                <div class="col">
+                  <div class="mb-4">
+                    <label for="priceAdd" class="form-label">Đơn giá</label>
+                    <input type="text" class="form-control" id="priceAdd" />
+                  </div>
+                </div>
+                <div class="col">
+                  <div class="mb-4">
+                    <label for="priceAdd" class="form-label">Thể loại</label>
+                    <select
+                      class="form-select"
+                      aria-label="Default select example"
+                    >
+                      <option selected disabled>Chọn</option>
+                      <option value="hai-san">Hải sản</option>
+                      <option value="thit-nuong">Thịt nướng</option>
+                      <option value="dimsum">Dimsum, Cơm, Mỳ</option>
+                      <option value="rau-cu">Rau củ quả nướng</option>
+                      <option value="lau">Lẩu</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+              <div class="mb-4">
+                <label for="fileAdd" class="form-label"
+                  >Hình ảnh minh họa</label
+                >
+                <input class="form-control" type="file" id="fileAdd" />
+              </div>
+              <div class="mb-4">
+                <label for="descAdd" class="form-label">Mô tả</label>
+                <textarea class="form-control" id="descAdd" rows="4"></textarea>
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Đóng
+            </button>
+            <button type="submit" class="btn btn-success bg-success-btn">
+              Thêm
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Sửa -->
+    <div
+      class="modal fade"
+      id="modalEdit"
+      tabindex="-1"
+      aria-labelledby="modalEditLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="modalEditLabel">Sửa món ăn</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <form>
+              <div class="mb-4">
+                <label for="nameEdit" class="form-label">Tên món ăn</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="nameEdit"
+                  aria-describedby="nameEdit"
+                />
+              </div>
+              <div class="row">
+                <div class="col">
+                  <div class="mb-4">
+                    <label for="priceEdit" class="form-label">Đơn giá</label>
+                    <input type="text" class="form-control" id="priceEdit" />
+                  </div>
+                </div>
+                <div class="col">
+                  <div class="mb-4">
+                    <label for="category" class="form-label">Thể loại</label>
+                    <select
+                      class="form-select"
+                      aria-label="Default select example"
+                    >
+                      <option selected disabled>Chọn</option>
+                      <option value="hai-san">Hải sản</option>
+                      <option value="thit-nuong">Thịt nướng</option>
+                      <option value="dimsum">Dimsum, Cơm, Mỳ</option>
+                      <option value="rau-cu">Rau củ quả nướng</option>
+                      <option value="lau">Lẩu</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+              <div class="mb-4">
+                <label for="fileEdit" class="form-label"
+                  >Hình ảnh minh họa</label
+                >
+                <input class="form-control" type="file" id="fileEdit" />
+              </div>
+              <div class="mb-4">
+                <label for="descEdit" class="form-label">Mô tả</label>
+                <textarea
+                  class="form-control"
+                  id="descEdit"
+                  rows="4"
+                ></textarea>
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Đóng
+            </button>
+            <button type="button" class="btn btn-primary bg-primary-btn">
+              Lưu thay đổi
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Xóa -->
+    <div
+      class="modal fade"
+      id="modalDelete"
+      tabindex="-1"
+      aria-labelledby="modalDeleteLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="modalDeleteLabel">Xóa món ăn</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">Bạn chắc chắn muốn xóa?</div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Hủy
+            </button>
+            <button type="button" class="btn btn-danger bg-danger-btn">
+              Xóa
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+      crossorigin="anonymous"
+    ></script>
+    <script src="./js/index.js"></script>
+  </body>
+</html>
