@@ -321,22 +321,21 @@
               <div class="wrapper-order-dish">
                 <div class="row mb-4 align-items-center">
                   <div class="col-7">
-                    <select
-                      class="form-select"
-                      aria-label="Default select example"
-                    >
-                      <option selected disabled>Vui lòng chọn món</option>
-                      <option value="lau-bo">Lẩu bò</option>
-                      <option value="lau-ech">Lẩu ếch</option>
-                      <option value="ha-cao">Há cảo</option>
-                    </select>
+                    <div class="">
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="customerAddDish"
+                        placeholder="Tên món ăn"
+                      />
+                    </div>
                   </div>
                   <div class="col-5 resizeBox">
                     <div class="">
                       <input
                         type="number"
                         class="form-control"
-                        id="customerAdd"
+                        id="customerAddQuantity"
                         placeholder="Nhập số lượng"
                       />
                     </div>
@@ -398,6 +397,7 @@
       integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
       crossorigin="anonymous"
     ></script>
+
     <script src="./js/index.js"></script>
     <script src="./js/order.js"></script>
   </body>

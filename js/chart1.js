@@ -31,7 +31,7 @@ const ctx2 = document.getElementById("barchart");
 new Chart(ctx2, {
   type: "bar",
   data: {
-    labels: ["Th2", "Th3", "Th4", "Th5", "Th6", "Th7", "CN"],
+    labels: ["T2", "T3", "T4", "T5", "T6", "T7", "CN"],
     datasets: [
       {
         label: "Lượt khách mỗi ngày",
