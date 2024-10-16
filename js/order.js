@@ -1,10 +1,11 @@
 const wrapperOrderDish = document.querySelector(".wrapper-order-dish");
 const btnAddDish = document.querySelector(".btnAddDish");
 const resizeBox = document.querySelector(".resizeBox");
+let dishCount = 1;
 
 btnAddDish.onclick = function () {
   const newDishHTML = `
-           <div class="row mb-4 align-items-center">
+           <div class="row mb-4 align-items-center dish dish${dishCount}">
                   <div class="col-7">
                     <select
                       class="form-select"
@@ -33,4 +34,5 @@ btnAddDish.onclick = function () {
         `;
   wrapperOrderDish.insertAdjacentHTML("beforeend", newDishHTML);
   resizeBox.classList.replace("col-5", "col-4");
+  dishCount++;
 };
