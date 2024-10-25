@@ -2,9 +2,18 @@
   background-color: #15a362 !important;
 }
 
+.btn-outline-success {
+  color: #15a362 !important;
+}
+
 .bg-success-btn {
   background-color: #15a362 !important;
   border: none;
+}
+
+.btn-outline-success:hover {
+  color: white !important;
+  background-color: #0d864f !important;
 }
 
 .bg-success-btn:hover {
@@ -50,6 +59,10 @@
 
 .text-success {
   color: #15a362;
+}
+
+.opa-85 {
+  opacity: 0.85;
 }
 
 body {
@@ -154,4 +167,13 @@ input:disabled {
 
 .list-group-item:hover {
   background-color: #edfdf6;
+}
+
+input {
+  border: none;
+  outline: none;
+}
+
+.cp {
+  cursor: pointer;
 }

@@ -17,7 +17,7 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="./css/global.css" />
-    <link rel="stylesheet" href="./css/user.css" />
+    <link rel="stylesheet" href="./css/home.css" />
     <link rel="stylesheet" href="./css/themify-icons.css" />
   </head>
   <body>
@@ -28,7 +28,7 @@
             <h4 class="mb-0">ADMIN</h4>
           </div>
           <hr />
-          <a href="./home.html" class="mt-4 tab_item">
+          <a href="./home.html" class="mt-4 tab_item active">
             <i class="ti-home"></i>
             <span>Trang chủ</span>
           </a>
@@ -93,65 +93,55 @@
             </div>
           </div>
           <div class="mt-4 wrapper-content">
-            <h3>Tài khoản</h3>
-            <hr class="mt-4" />
-            <div class="row mt-4 general-info">
-              <div class="col-12 col-sm-5">
-                <h4>Thông tin chung</h4>
-                <p class="text-body-secondary">
-                  Tại đây, bạn có thể tùy chỉnh các thông tin cá nhân cơ bản như
-                  họ tên, mật khẩu và cài đặt tài khoản của mình.
+            <h3>Trang chủ</h3>
+            <div class="mt-4 greeting px-5 py-4 shadow-sm">
+              <h2>Xin chào!</h2>
+              <div
+                class="d-flex flex-wrap wrapper_greeting-text align-items-center"
+              >
+                <p class="mt-2 greeting-text">
+                  Đây là không gian dành riêng cho người quản lý, với mục đích
+                  theo dõi và điều hành hoạt động của Hẻm Thượng Hải một cách
+                  hiệu quả.
                 </p>
+                <a
+                  href="#start"
+                  type="button"
+                  class="btn btn-success greeting-btn px-3 d-flex gap-2 align-items-center bg-success-btn"
+                >
+                  <i class="ti-arrow-down"></i>
+                  Bắt đầu
+                </a>
               </div>
-              <div class="col-12 col-sm-7 form-info-user shadow-sm rounded">
-                <form class="form-user">
-                  <div class="mb-3">
-                    <label for="name" class="form-label h6">Họ và tên</label>
-                    <input
-                      type="text"
-                      class="form-control"
-                      id="name"
-                      value="Trần Hà"
-                    />
-                  </div>
-                  <div class="mb-3">
-                    <label for="email" class="form-label h6"
-                      >Địa chỉ email</label
-                    >
-                    <input
-                      type="email"
-                      class="form-control"
-                      id="email"
-                      value="haqt2003@gmail.com"
-                      disabled
-                    />
-                  </div>
-                  <div class="mb-3">
-                    <label for="password" class="form-label h6">Mật khẩu</label>
-                    <input
-                      type="text"
-                      class="form-control"
-                      id="password"
-                      placeholder="••••••"
-                      disabled
-                    />
-                  </div>
-
-                  <button
-                    type="button"
-                    class="btn btn-success bg-success-btn"
-                    data-bs-toggle="modal"
-                    data-bs-target="#modalConfirm"
-                  >
-                    Lưu thay đổi
-                  </button>
-                  <button
-                    type="button"
-                    class="btn btn-danger bg-danger-btn changePasswordBtn"
-                  >
-                    Đổi mật khẩu
-                  </button>
-                </form>
+            </div>
+            <div class="row mt-4 gap-3 items_containter-index" id="start">
+              <div class="col text-center shadow-sm item-index">
+                <div class="text-item-index1">TỔNG DOANH THU</div>
+                <div class="text-item-index2">144.000.000</div>
+                <div class="text-item-index3">VNĐ</div>
+              </div>
+              <div class="col text-center shadow-sm item-index">
+                <div class="text-item-index1">SỐ MÓN ĂN</div>
+                <div class="text-item-index2">50</div>
+                <div class="text-item-index3">Món</div>
+              </div>
+              <div class="col text-center shadow-sm item-index">
+                <div class="text-item-index1">NHÂN VIÊN</div>
+                <div class="text-item-index2">70</div>
+                <div class="text-item-index3">Người</div>
+              </div>
+              <div class="col text-center shadow-sm item-index">
+                <div class="text-item-index1">TỔNG HÓA ĐƠN</div>
+                <div class="text-item-index2">1000</div>
+                <div class="text-item-index3">Đơn</div>
+              </div>
+            </div>
+            <div class="row mt-4 gap-3 chart-container">
+              <div class="col chart rounded shadow-sm">
+                <canvas id="linechart"></canvas>
+              </div>
+              <div class="col chart rounded shadow-sm">
+                <canvas id="barchart"></canvas>
               </div>
             </div>
           </div>
@@ -195,47 +185,13 @@
         </div>
       </div>
     </div>
-    <!-- Xác nhận -->
-    <div
-      class="modal fade"
-      id="modalConfirm"
-      tabindex="-1"
-      aria-labelledby="modalConfirmLabel"
-      aria-hidden="true"
-    >
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="modalConfirmLabel">Lưu thông tin</h5>
-            <button
-              type="button"
-              class="btn-close"
-              data-bs-dismiss="modal"
-              aria-label="Close"
-            ></button>
-          </div>
-          <div class="modal-body">Bạn chắc chắn về thay đổi của mình?</div>
-          <div class="modal-footer">
-            <button
-              type="button"
-              class="btn btn-secondary"
-              data-bs-dismiss="modal"
-            >
-              Hủy
-            </button>
-            <button type="button" class="btn btn-success bg-success-btn">
-              Lưu
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
       crossorigin="anonymous"
     ></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="./js/chart.js"></script>
     <script src="./js/home.js"></script>
-    <script src="./js/user.js"></script>
   </body>
 </html>

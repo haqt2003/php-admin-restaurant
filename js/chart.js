@@ -8,7 +8,6 @@ new Chart(ctx1, {
       {
         label: "Doanh thu",
         data: [5, 12, 16, 15, 25],
-        borderWidth: 1,
         backgroundColor: "#1ABB71",
         borderColor: "#1ABB71",
         fill: false,
@@ -36,12 +35,7 @@ new Chart(ctx2, {
       {
         label: "Lượt khách mỗi ngày",
         data: [28, 30, 16, 15, 25, 100, 60],
-        borderWidth: 1,
         backgroundColor: "#1ABB71",
-        borderColor: "#1ABB71",
-        fill: false,
-        tension: 0.2,
-        borderWidth: 2,
       },
     ],
   },
