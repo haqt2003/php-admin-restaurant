@@ -64,7 +64,7 @@
                 <a class="dropdown-item" href="">Khách hàng</a>
               </li>
               <li>
-                <a class="dropdown-item" href="./login.html">Quản lý</a>
+                <a class="dropdown-item" href="./login.php">Quản lý</a>
               </li>
             </ul>
           </div>

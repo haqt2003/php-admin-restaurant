@@ -8,17 +8,15 @@ btnAddDish.onclick = function () {
     <div class="row mb-4 align-items-center dish dish${dishCount}">
       <div class="col-7">
         <div class="">
-          <input
-            type="text"
-            class="form-control"
-            id="customerAddDish"
-            placeholder="Tên món ăn"
-          />
+         <select class="form-control" id="customerAddDish" name="dish[]">
+           ${dishOptions}
+        </select>
         </div>
       </div>
       <div class="col-4">
         <div class="">
           <input
+          name="quantity[]"
             type="number"
             class="form-control"
             id="customerAddQuantity"
