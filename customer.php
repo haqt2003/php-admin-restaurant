@@ -1,6 +1,15 @@
 <?php
 include('./php/database.php'); // Kết nối đến cơ sở dữ liệu
 
+session_start();
+
+// Kiểm tra nếu người dùng đã đăng nhập
+if (isset($_SESSION['user_name'])) {
+  $userName = $_SESSION['user_name'];
+} else {
+  $userName = ''; // Nếu chưa đăng nhập
+}
+
 // Xác định số dòng trên mỗi trang
 $limit = 10; // 10 khách hàng mỗi trang
 
@@ -87,7 +96,7 @@ $conn->close();
       <div class="col-10 main">
         <div class="header d-flex align-items-center justify-content-between">
           <div class="input-group search-bar">
-            <input
+            <!-- <input
               type="text"
               class="form-control"
               placeholder="Vui lòng nhập..."
@@ -98,10 +107,10 @@ $conn->close();
               type="button"
               id="button-addon2">
               Tìm kiếm
-            </button>
+            </button> -->
           </div>
           <div class="d-flex gap-2 align-items-center header_user">
-            <span>Chào, Trần Hà! </span>
+            <span>Chào, <?php echo $userName; ?>! </span>
             <i class="ti-angle-down dropdown-user"></i>
 
             <ul class="list-group header_user-dropdown visually-hidden">

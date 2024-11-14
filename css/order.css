@@ -4,7 +4,7 @@
 
 .add-order-btn {
   height: fit-content;
-  width: 250px;
+  width: 150px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -13,7 +13,7 @@
 
 .export-order-btn {
   height: fit-content;
-  width: 220px;
+  width: 150px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -22,4 +22,8 @@
 
 .ti-trash {
   cursor: pointer;
+}
+
+.form-fil {
+  width: 300px;
 }

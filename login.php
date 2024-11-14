@@ -28,28 +28,33 @@
     <div class="row login-containter">
       <div class="col-12 col-lg-6 login-form text-center">
         <h2 class="login-text mb-4">Đăng nhập</h2>
-        <div class="form-floating mb-3">
-          <input
-            type="email"
-            class="form-control"
-            id="floatingInput"
-            placeholder="name@example.com" />
-          <label for="floatingInput">Địa chỉ email</label>
-        </div>
-        <div class="form-floating mb-4">
-          <input
-            type="password"
-            class="form-control"
-            id="floatingPassword"
-            placeholder="Password" />
-          <label for="floatingPassword">Mật khẩu</label>
-        </div>
-        <a
-          href="./home.php"
-          type="button"
-          class="btn btn-success bg-success-btn login-btn mb-3">
-          Đăng nhập
-        </a>
+        <form action="./php/login.php" method="POST" id="loginForm">
+          <div class="form-floating mb-3">
+            <input
+              type="email"
+              class="form-control"
+              id="floatingInput"
+              placeholder="name@example.com"
+              name="email"
+              required />
+            <label for="floatingInput">Địa chỉ email</label>
+          </div>
+          <div class="form-floating mb-4">
+            <input
+              type="password"
+              class="form-control"
+              id="floatingPassword"
+              placeholder="Password"
+              name="password"
+              required />
+            <label for="floatingPassword">Mật khẩu</label>
+          </div>
+          <button
+            type="submit"
+            class="btn btn-success bg-success-btn login-btn mb-3">
+            Đăng nhập
+          </button>
+        </form>
         <div class="">
           Bạn chưa có tài khoản? <a href="./signup.php">Đăng ký</a>
         </div>

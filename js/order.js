@@ -8,7 +8,7 @@ btnAddDish.onclick = function () {
     <div class="row mb-4 align-items-center dish dish${dishCount}">
       <div class="col-7">
         <div class="">
-         <select class="form-control" id="customerAddDish" name="dish[]">
+         <select class="form-control form-select" id="customerAddDish" name="dish[]">
            ${dishOptions}
         </select>
         </div>

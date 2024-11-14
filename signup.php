@@ -10,8 +10,17 @@
     rel="stylesheet"
     integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
     crossorigin="anonymous" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Afacad+Flux:wght@100..1000&display=swap"
+    rel="stylesheet" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=LXGW+WenKai+TC&display=swap"
+    rel="stylesheet" />
   <link rel="stylesheet" href="./css/global.css" />
   <link rel="stylesheet" href="./css/login.css" />
+  <link rel="stylesheet" href="./css/themify-icons.css" />
 </head>
 
 <body>

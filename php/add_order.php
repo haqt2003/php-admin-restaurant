@@ -55,13 +55,33 @@ $stmt->bind_param("iid", $customerId, $employeeId, $totalAmount);
 $stmt->execute();
 $orderId = $conn->insert_id; // Lấy ID của đơn hàng vừa tạo
 
-// Thêm chi tiết món ăn vào bảng `chitietdonhang`
+// Thêm chi tiết món ăn vào bảng `chitietdonhang`, kiểm tra món ăn đã có chưa
 foreach ($dishIds as $index => $dishId) {
   $quantity = intval($quantities[$index]); // Đảm bảo số lượng là số
-  $query = "INSERT INTO chitietdonhang (iddonhang, idmonan, soluong) VALUES (?, ?, ?)";
+
+  // Kiểm tra xem món ăn đã tồn tại trong đơn hàng chưa
+  $query = "SELECT id FROM chitietdonhang WHERE iddonhang = ? AND idmonan = ?";
   $stmt = $conn->prepare($query);
-  $stmt->bind_param("iii", $orderId, $dishId, $quantity);
+  $stmt->bind_param("ii", $orderId, $dishId);
   $stmt->execute();
+  $result = $stmt->get_result();
+
+  if ($result->num_rows > 0) {
+    // Nếu món ăn đã tồn tại trong đơn hàng, cập nhật số lượng
+    $existingItem = $result->fetch_assoc();
+    $existingId = $existingItem['id'];
+
+    $updateQuery = "UPDATE chitietdonhang SET soluong = soluong + ? WHERE id = ?";
+    $stmt = $conn->prepare($updateQuery);
+    $stmt->bind_param("ii", $quantity, $existingId);
+    $stmt->execute();
+  } else {
+    // Nếu món ăn chưa có, thêm món ăn mới vào chi tiết đơn hàng
+    $query = "INSERT INTO chitietdonhang (iddonhang, idmonan, soluong) VALUES (?, ?, ?)";
+    $stmt = $conn->prepare($query);
+    $stmt->bind_param("iii", $orderId, $dishId, $quantity);
+    $stmt->execute();
+  }
 }
 
 // Cập nhật số đơn hàng và tổng chi tiêu của khách hàng
@@ -71,4 +91,4 @@ $stmt->bind_param("di", $totalAmount, $customerId);
 $stmt->execute();
 
 $conn->close();
-echo "Đơn hàng đã được thêm thành công!";
+echo "<script>alert('Thêm đơn hàng thành công.'); window.location.href = '../order.php';</script>";

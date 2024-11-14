@@ -1,6 +1,14 @@
 <?php
-// Kết nối cơ sở dữ liệu
 include('./php/database.php');
+
+session_start();
+
+// Kiểm tra nếu người dùng đã đăng nhập
+if (isset($_SESSION['user_name'])) {
+  $userName = $_SESSION['user_name'];
+} else {
+  echo "<script>window.location.href = './login.php';</script>";
+}
 
 // Truy vấn lấy danh sách món ăn từ cơ sở dữ liệu
 $query = "SELECT id, tenmonan FROM monan";
@@ -14,7 +22,90 @@ if ($result->num_rows > 0) {
   }
 }
 
-// Đóng kết nối cơ sở dữ liệu
+
+
+// Lọc theo thời gian
+$timeFilter = isset($_GET['time_filter']) ? $_GET['time_filter'] : 'all-time';
+$limit = 10; // Số lượng đơn hàng hiển thị mỗi trang
+$page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+$offset = ($page - 1) * $limit;
+
+// Xây dựng điều kiện lọc thời gian
+$timeCondition = "";
+switch ($timeFilter) {
+  case 'this-week':
+    $timeCondition = "AND donhang.ngaytaodon >= CURDATE() - INTERVAL WEEKDAY(CURDATE()) DAY";
+    break;
+  case 'this-month':
+    $timeCondition = "AND MONTH(donhang.ngaytaodon) = MONTH(CURDATE()) AND YEAR(donhang.ngaytaodon) = YEAR(CURDATE())";
+    break;
+  case 'this-year':
+    $timeCondition = "AND YEAR(donhang.ngaytaodon) = YEAR(CURDATE())";
+    break;
+  default:
+    $timeCondition = ""; // Tất cả thời gian
+}
+
+// Truy vấn lấy danh sách đơn hàng với phân trang và lọc thời gian
+$query1 = "
+  SELECT donhang.id AS order_id, donhang.ngaytaodon, khachhang.tenkhachhang, nhanvien.tennhanvien, 
+         monan.tenmonan, chitietdonhang.soluong, monan.gia, 
+         (chitietdonhang.soluong * monan.gia) AS total_price
+  FROM donhang
+  JOIN chitietdonhang ON donhang.id = chitietdonhang.iddonhang
+  JOIN monan ON chitietdonhang.idmonan = monan.id
+  JOIN khachhang ON donhang.idkhachhang = khachhang.id
+  JOIN nhanvien ON donhang.idnhanvien = nhanvien.id
+  WHERE 1=1 $timeCondition
+  ORDER BY donhang.id DESC
+  LIMIT $limit OFFSET $offset"; // Phân trang
+
+$result1 = $conn->query($query1);
+
+// Khởi tạo mảng để nhóm các đơn hàng theo order_id
+$orders = [];
+if ($result1->num_rows > 0) {
+  while ($row = $result1->fetch_assoc()) {
+    $order_id = $row['order_id'];
+
+    // Nếu đơn hàng chưa có trong mảng $orders, thêm vào
+    if (!isset($orders[$order_id])) {
+      $orders[$order_id] = [
+        'order_id' => $order_id,
+        'ngaytaodon' => $row['ngaytaodon'],
+        'tenkhachhang' => $row['tenkhachhang'],
+        'tennhanvien' => $row['tennhanvien'],
+        'items' => [],
+        'total_amount' => 0
+      ];
+    }
+
+    // Thêm mỗi món ăn và số lượng vào danh sách món ăn của đơn hàng
+    $orders[$order_id]['items'][] = [
+      'tenmonan' => $row['tenmonan'],
+      'soluong' => $row['soluong'],
+      'total_price' => $row['total_price']
+    ];
+
+    // Tính tổng giá trị đơn hàng
+    $orders[$order_id]['total_amount'] += $row['total_price'];
+  }
+}
+
+// Tính số trang
+$query2 = "
+  SELECT COUNT(DISTINCT donhang.id) AS total_orders
+  FROM donhang
+  JOIN chitietdonhang ON donhang.id = chitietdonhang.iddonhang
+  JOIN monan ON chitietdonhang.idmonan = monan.id
+  JOIN khachhang ON donhang.idkhachhang = khachhang.id
+  JOIN nhanvien ON donhang.idnhanvien = nhanvien.id
+  WHERE 1=1 $timeCondition";
+
+$result2 = $conn->query($query2);
+$totalOrders = $result2->fetch_assoc()['total_orders'];
+$totalPages = ceil($totalOrders / $limit);
+
 $conn->close();
 ?>
 
@@ -80,7 +171,7 @@ $conn->close();
       <div class="col-10 main">
         <div class="header d-flex align-items-center justify-content-between">
           <div class="input-group search-bar">
-            <input
+            <!-- <input
               type="text"
               class="form-control"
               placeholder="Vui lòng nhập..."
@@ -91,10 +182,10 @@ $conn->close();
               type="button"
               id="button-addon2">
               Tìm kiếm
-            </button>
+            </button> -->
           </div>
           <div class="d-flex gap-2 align-items-center header_user">
-            <span>Chào, Trần Hà! </span>
+            <span>Chào, <?php echo $userName; ?>! </span>
             <i class="ti-angle-down dropdown-user"></i>
 
             <ul class="list-group header_user-dropdown visually-hidden">
@@ -111,15 +202,16 @@ $conn->close();
           <div class="d-flex justify-content-between">
             <h3>Đơn hàng</h3>
             <div class="d-flex gap-2 justify-content-end wrapper-order-btn">
-              <select
-                class="form-select select-menu"
-                aria-label="Default select example">
-                <option selected>Tất cả thời gian</option>
-                <option value="this-week">Trong tuần này</option>
-                <option value="this-month">Trong tháng này</option>
-                <option value="this-year">Trong năm nay</option>
-              </select>
+              <form method="GET" action="./order.php" class="mb-3 form-fil">
+                <select class="form-select select-menu" name="time_filter" onchange="this.form.submit()">
+                  <option value="all-time" <?php if ($timeFilter == 'all-time') echo 'selected'; ?>>Tất cả thời gian</option>
+                  <option value="this-week" <?php if ($timeFilter == 'this-week') echo 'selected'; ?>>Trong tuần này</option>
+                  <option value="this-month" <?php if ($timeFilter == 'this-month') echo 'selected'; ?>>Trong tháng này</option>
+                  <option value="this-year" <?php if ($timeFilter == 'this-year') echo 'selected'; ?>>Trong năm nay</option>
+                </select>
+              </form>
               <button
+                onclick="window.location.href='./php/export_order.php'"
                 type="button"
                 class="btn btn-primary bg-primary-btn export-order-btn">
                 <i class="ti-export"></i>
@@ -148,51 +240,53 @@ $conn->close();
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <th scope="row">1</th>
-                <td>123456</td>
-                <td>20/01/2024 – 14:30</td>
-                <td>
-                  <table class="table table-bordered">
-                    <tr>
-                      <td style="width: 70%">Lẩu ếch</td>
-                      <td>1</td>
-                    </tr>
-                    <tr>
-                      <td style="width: 70%">Cá cay</td>
-                      <td>2</td>
-                    </tr>
-                  </table>
-                </td>
-                <td>5.000.000đ</td>
-                <td>Trần Quang Hà</td>
-                <td>Nguyễn Văn A</td>
-              </tr>
-
+              <?php
+              $count = 1; // Để hiển thị số thứ tự
+              foreach ($orders as $order) {
+                echo "<tr>
+                            <td>" . $count++ . "</td>
+                            <td>" . $order['order_id'] . "</td>
+                          <td>" . date('d/m/Y - H:i:s', strtotime($order['ngaytaodon'])) . "</td>
+                            <td>
+                                <table class='table table-bordered'>
+                                    ";
+                foreach ($order['items'] as $item) {
+                  echo "<tr>
+                                <td style='width: 70%'>" . $item['tenmonan'] . "</td>
+                                <td>" . $item['soluong'] . "</td>
+                            </tr>";
+                }
+                echo "</table>
+                            </td>
+                            <td>" . number_format($order['total_amount'], 0, ',', '.') . "đ</td>
+                            <td>" . $order['tenkhachhang'] . "</td>
+                            <td>" . $order['tennhanvien'] . "</td>
+                        </tr>";
+              }
+              ?>
             </tbody>
           </table>
 
           <div class="d-flex justify-content-center">
             <nav aria-label="Page navigation example" class="mt-3">
               <ul class="pagination">
-                <li class="page-item disabled">
-                  <a class="page-link" href="#" aria-label="Previous">
-                    <span aria-hidden="true">&laquo;</span>
-                  </a>
-                </li>
-                <li class="page-item active" aria-current="page">
-                  <a class="page-link" href="#">1</a>
-                </li>
-                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                <li class="page-item">
-                  <a class="page-link" href="#" aria-label="Next">
-                    <span aria-hidden="true">&raquo;</span>
-                  </a>
-                </li>
+                <?php for ($i = 1; $i <= $totalPages; $i++) { ?>
+                  <li class="page-item <?php echo ($i == $page) ? 'active' : ''; ?>">
+                    <a class="page-link" href="?time_filter=<?php echo $timeFilter; ?>&page=<?php echo $i; ?>"><?php echo $i; ?></a>
+                  </li>
+                <?php } ?>
+
+                <?php if ($page < $totalPages): ?>
+                  <li class="page-item">
+                    <a class="page-link" href="?time_filter=<?php echo $timeFilter; ?>&page=<?php echo $page + 1; ?>" aria-label="Next">
+                      <span aria-hidden="true">&raquo;</span>
+                    </a>
+                  </li>
+                <?php endif; ?>
               </ul>
             </nav>
           </div>
+
         </div>
       </div>
     </div>
@@ -252,7 +346,7 @@ $conn->close();
               <div class="row mb-4 align-items-center">
                 <div class="col-7">
                   <div class="">
-                    <select class="form-control" id="customerAddDish" name="dish[]">
+                    <select class="form-control form-select" id="customerAddDish" name="dish[]">
                       <?php echo $dishOptions; // In các option vào dropdown 
                       ?>
                     </select>
