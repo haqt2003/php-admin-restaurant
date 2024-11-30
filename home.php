@@ -9,7 +9,7 @@ if (isset($_SESSION['user_name'])) {
   echo "<script>window.location.href = './login.php';</script>";
 }
 
-
+// Lấy tổng giá trị tất cả đơn hàng
 $totalRevenueQuery = "SELECT SUM(tonggiatri) AS total_revenue FROM donhang";
 $totalRevenueResult = $conn->query($totalRevenueQuery);
 $totalRevenue = $totalRevenueResult->fetch_assoc()['total_revenue'];
@@ -28,6 +28,28 @@ $totalEmployees = $totalEmployeesResult->fetch_assoc()['total_employees'];
 $totalOrdersQuery = "SELECT COUNT(*) AS total_orders FROM donhang";
 $totalOrdersResult = $conn->query($totalOrdersQuery);
 $totalOrders = $totalOrdersResult->fetch_assoc()['total_orders'];
+
+$sql = "SELECT SUM(tonggiatri) AS total_revenue 
+        FROM donhang 
+        WHERE YEAR(ngaytaodon) = 2024";
+
+
+$result = $conn->query($sql);
+
+// Kiểm tra kết quả
+if ($result->num_rows > 0) {
+  // Lấy dữ liệu và lưu vào biến
+  $row = $result->fetch_assoc();
+  $total_revenue_2024 = $row['total_revenue'];
+
+  // Lưu vào biến $result
+  $result = $total_revenue_2024;
+} else {
+  // Nếu không có dữ liệu
+  $result = 0;
+}
+
+
 $conn->close();
 ?>
 
@@ -164,8 +186,17 @@ $conn->close();
             <div class="col chart rounded shadow-sm">
               <canvas id="linechart"></canvas>
             </div>
-            <div class="col chart rounded shadow-sm">
-              <canvas id="barchart"></canvas>
+            <div class="col chart rounded shadow-sm man-col">
+              <h1>👑</h1>
+              <div class="d-flex align-items-center">
+                <img src="./assets/images/man.png" width="300px" alt="" class="man">
+                <div class="cn">
+                  <h3>Nhân viên xuất sắc</h3>
+                  <div class="mt-3 cn1">Trần Quang Hà</div>
+                  <div class="">11/12/2003</div>
+                  <div class="mt-2 cn2">200 đơn hàng trong tháng</div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -210,7 +241,35 @@ $conn->close();
     integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
     crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  <script src="./js/chart.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      const ctx1 = document.getElementById("linechart");
+      var all2024 = <?php echo json_encode($result); ?>;
+
+      new Chart(ctx1, {
+        type: "line",
+        data: {
+          labels: ["2020", "2021", "2022", "2023", "2024"],
+          datasets: [{
+            label: "Doanh thu",
+            data: [150000000, 240000000, 200000000, 300000000, all2024],
+            backgroundColor: "#1ABB71",
+            borderColor: "#1ABB71",
+            fill: false,
+            tension: 0.2,
+            borderWidth: 2,
+          }],
+        },
+        options: {
+          scales: {
+            y: {
+              beginAtZero: true,
+            },
+          },
+        },
+      });
+    });
+  </script>
   <script src="./js/home.js"></script>
 </body>
 

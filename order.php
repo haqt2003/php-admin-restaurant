@@ -106,6 +106,9 @@ $result2 = $conn->query($query2);
 $totalOrders = $result2->fetch_assoc()['total_orders'];
 $totalPages = ceil($totalOrders / $limit);
 
+// Lấy doanh thu
+$query3 = "SELECT * FROM donhang";
+
 $conn->close();
 ?>
 
@@ -418,9 +421,7 @@ $conn->close();
     var dishOptions = "<?php echo addslashes($dishOptions); ?>";
   </script>
   <script src="./js/home.js"></script>
-  <script src="./js/order.js">
-
-  </script>
+  <script src="./js/order.js"></script>
 </body>
 
 </html>

@@ -171,21 +171,20 @@ $conn->close();
                         <td>" . number_format($row['luong'], 0, ',', '.') . "đ</td>
                         <td class='text-end'>
                             <button 
-  type='button' 
-  class='btn btn-primary bg-primary-btn' 
-  data-bs-toggle='modal' 
-  data-bs-target='#modalEdit'
-  data-id='" . $row['id'] . "'
-  data-name='" . $row['tennhanvien'] . "'
-  data-role='" . $row['vaitro'] . "'
-  data-phone='" . $row['sodienthoai'] . "'
-  data-email='" . $row['email'] . "'
-  data-gender='" . $row['gioitinh'] . "'
-  data-birth='" . $row['ngaysinh'] . "'
-  data-salary='" . $row['luong'] . "'>
-    Sửa
-</button>
-
+                              type='button' 
+                              class='btn btn-primary bg-primary-btn' 
+                              data-bs-toggle='modal' 
+                              data-bs-target='#modalEdit'
+                              data-id='" . $row['id'] . "'
+                              data-name='" . $row['tennhanvien'] . "'
+                              data-role='" . $row['vaitro'] . "'
+                              data-phone='" . $row['sodienthoai'] . "'
+                              data-email='" . $row['email'] . "'
+                              data-gender='" . $row['gioitinh'] . "'
+                              data-birth='" . $row['ngaysinh'] . "'
+                              data-salary='" . $row['luong'] . "'>
+                                Sửa
+                            </button>
                             <button type='button' class='btn btn-danger bg-danger-btn ml' data-bs-toggle='modal' data-bs-target='#modalDelete' data-id='" . $row['id'] . "'>
                                 Xóa
                             </button>
